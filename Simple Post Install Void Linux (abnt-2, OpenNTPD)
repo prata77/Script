@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Instala o OpenNTPD
+xbps-install -y openntpd
+
+# Configura o OpenNTPD para sincronizar com os servidores padrão do Void Linux
+echo "servers pool.ntp.org" > /etc/ntpd.conf
+
+# Cria o link simbólico para iniciar o serviço do OpenNTPD no boot
+ln -s /etc/sv/ntpd /var/service/
+
+# Configura o teclado ABNT2
+localectl set-keymap --no-convert br-abnt2
+echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
